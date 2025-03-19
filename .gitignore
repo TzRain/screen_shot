@@ -1,2 +1,6 @@
 venv/
 screenshots/
+*.spec
+build/
+dist/
+screenshots.lg/

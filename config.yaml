@@ -1,0 +1,10 @@
+auto_screenshot_interval: 0.5
+azure_sas_url: ''
+base_save_path: screenshots
+capture_mode: auto
+container_name: ''
+jpeg_quality: 80
+min_screenshot_interval: 0.1
+recent_screenshots_count: 5
+threshold: 0.995
+upload_to_cloud: false
