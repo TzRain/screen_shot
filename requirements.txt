@@ -1,0 +1,10 @@
+opencv-python
+pyautogui
+numpy
+Pillow
+azure-storage-blob
+scikit-image
+pygetwindow
+keyboard
+mouse
+PyYAML
