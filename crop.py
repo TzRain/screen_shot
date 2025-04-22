@@ -80,7 +80,7 @@ class ImageCropperApp:
         for dir_name in sorted(os.listdir(self.app_dir)):
             dir_path = os.path.join(self.app_dir, dir_name)
             if os.path.isdir(dir_path):
-                required_files = {'cap_area_image.jpg', 'image_meta.json'}
+                required_files = {'cap_full_image.jpg', 'image_meta.json'}
                 if required_files.issubset(os.listdir(dir_path)):
                     self.image_dirs.append(dir_path)
 
@@ -88,8 +88,8 @@ class ImageCropperApp:
         """显示当前目录的图像"""
         if 0 <= self.current_index < len(self.image_dirs):
             current_dir = self.image_dirs[self.current_index]
-            img_path = os.path.join(current_dir, 'cap_area_image.jpg')
-            
+            img_path = os.path.join(current_dir, 'cap_full_image.jpg')
+           
             try:
                 img = Image.open(img_path)
                 self.display_image(img)
@@ -107,8 +107,8 @@ class ImageCropperApp:
         canvas_width = self.canvas.winfo_width() - 20
         canvas_height = self.canvas.winfo_height() - 20
         img_width, img_height = image.size
-        
-        scale = min(canvas_width/img_width, 
+       
+        scale = min(canvas_width/img_width,
                    canvas_height/img_height)
         new_size = (int(img_width*scale), int(img_height*scale))
         
@@ -134,7 +134,7 @@ class ImageCropperApp:
             self.canvas.delete("rect")
             x0, y0 = self.rect_start
             x1, y1 = event.x, event.y
-            self.canvas.create_rectangle(x0, y0, x1, y1, 
+            self.canvas.create_rectangle(x0, y0, x1, y1,
                                        outline='#00FF00', width=2, tags="rect")
 
     def end_rect(self, event):
@@ -159,8 +159,8 @@ class ImageCropperApp:
 
         # 保存裁剪图像
         current_dir = self.image_dirs[self.current_index]
-        img_path = os.path.join(current_dir, 'cap_area_image.jpg')
-        
+        img_path = os.path.join(current_dir, 'cap_full_image.jpg')
+    
         try:
             img = Image.open(img_path)
             crop_img = img.crop((x0, y0, x1, y1))
@@ -206,8 +206,8 @@ class ImageCropperApp:
         meta_path = os.path.join(dir_path, 'image_meta.json')
         with open(meta_path, 'r+') as f:
             meta = json.load(f)
-            cap_x, cap_y, _, _ = meta['cap_area']
-            
+            cap_x, cap_y, _, _ = meta['cap_full']
+           
             meta['crop_area_rel'] = [x0, y0, x1-x0, y1-y0]
             meta['crop_area_abs'] = [
                 cap_x + x0,
